@@ -15,6 +15,7 @@ table 50141 OutOfOfficeRequest
         {
             DataClassification = ToBeClassified;
             TableRelation = Employee."No.";
+            Editable = false;
         }
 
         field(3; "Start Date"; Date)
@@ -24,10 +25,11 @@ table 50141 OutOfOfficeRequest
 
             trigger OnValidate()
             var
-
+                WDay: Date;
             begin
-                if "Start Date" < WORKDATE() then
-                    Error('Дата начала не может быть меньше рабочей даты!');
+                WDay := WorkDate;
+                if "Start Date" < WorkDate() then
+                    Error('Start date can''t be less than Workdate');
             end;
         }
 
@@ -36,12 +38,6 @@ table 50141 OutOfOfficeRequest
             DataClassification = ToBeClassified;
             InitValue = 090000T;
             NotBlank = true;
-
-            trigger OnValidate()
-            begin
-                if "Start Time" = 0T then
-                    Error('This field can''t be empty');
-            end;
         }
 
         field(5; "End Date"; Date)
@@ -68,8 +64,8 @@ table 50141 OutOfOfficeRequest
         {
             DataClassification = ToBeClassified;
             OptionMembers = New,"In process",Approved,Declined;
-            OptionCaption = 'Новая, На рассмотрении, Утверждено, Отклонено';
             InitValue = New;
+            Editable = false;
         }
 
         field(9; Description; Text[250])
@@ -89,9 +85,7 @@ table 50141 OutOfOfficeRequest
         key(PrimaryKey; "Entry No")
         {
             Clustered = true;
-
         }
-
     }
 
     var

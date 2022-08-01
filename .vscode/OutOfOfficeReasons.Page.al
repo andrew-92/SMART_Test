@@ -4,7 +4,6 @@ page 50140 OutOfOfficeReasons
     ApplicationArea = All;
     UsageCategory = Lists;
     SourceTable = OutOfOfficeReasons;
-    CardPageId = 50142;
 
     layout
     {

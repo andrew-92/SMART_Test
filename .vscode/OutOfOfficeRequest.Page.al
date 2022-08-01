@@ -4,6 +4,7 @@ page 50143 OutOfOfficeRequest
     ApplicationArea = All;
     UsageCategory = Documents;
     SourceTable = OutOfOfficeRequest;
+    InsertAllowed = true;
 
     layout
     {
@@ -19,58 +20,47 @@ page 50143 OutOfOfficeRequest
                 field("Employee No."; Rec."Employee No.")
                 {
                     ApplicationArea = All;
-
-
                 }
 
                 field("Start Date"; Rec."Start Date")
                 {
                     ApplicationArea = All;
                     ShowMandatory = true;
-                    Editable = true;
-                    NotBlank = true;
-
                 }
 
                 field("Start Time"; Rec."Start Time")
                 {
                     ApplicationArea = All;
                     ShowMandatory = true;
-                    NotBlank = true;
                 }
 
                 field("End Date"; Rec."End Date")
                 {
                     ApplicationArea = All;
                     ShowMandatory = true;
-                    NotBlank = true;
                 }
 
                 field("End Time"; Rec."End Time")
                 {
                     ApplicationArea = All;
                     ShowMandatory = true;
-                    NotBlank = true;
                 }
 
                 field("Reason Code"; Rec."Reason Code")
                 {
                     ApplicationArea = All;
                     ShowMandatory = true;
-                    NotBlank = true;
                 }
 
                 field(Status; Rec.Status)
                 {
                     ApplicationArea = All;
-                    Editable = false;
                 }
 
                 field(Description; Rec.Description)
                 {
                     ApplicationArea = All;
                     ShowMandatory = true;
-                    NotBlank = true;
                 }
 
                 field("Rejection reason"; Rec."Rejection reason")
@@ -85,13 +75,42 @@ page 50143 OutOfOfficeRequest
     {
         area(Processing)
         {
-            action(ActionName)
+            action(StartProcess)
             {
+                Caption = 'Start process';
                 ApplicationArea = All;
 
                 trigger OnAction()
+                var
+                    ChangeStatus: Codeunit ChangeStatus;
                 begin
+                    ChangeStatus.SetToInProcess(Rec);
+                end;
+            }
 
+            action(Approve)
+            {
+                Caption = 'Approve';
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    ChangeStatus: Codeunit ChangeStatus;
+                begin
+                    ChangeStatus.SetToApproved(Rec);
+                end;
+            }
+
+            action(Decline)
+            {
+                Caption = 'Decline';
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    ChangeStatus: Codeunit ChangeStatus;
+                begin
+                    ChangeStatus.SetToDeclined(Rec);
                 end;
             }
         }

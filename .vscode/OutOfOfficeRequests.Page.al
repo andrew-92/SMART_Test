@@ -4,7 +4,7 @@ page 50141 OutOfOfficeRequests
     ApplicationArea = All;
     UsageCategory = Lists;
     SourceTable = OutOfOfficeRequest;
-    Editable = false;
+    CardPageId = 50143;
 
     layout
     {
@@ -88,10 +88,10 @@ page 50141 OutOfOfficeRequests
                 trigger OnAction()
                 var
                     SelectedRec: Record OutOfOfficeRequest;
+                    ChangeStatus: Codeunit ChangeStatus;
                 begin
                     CurrPage.GetRecord(SelectedRec);
-                    SelectedRec.Status := SelectedRec.Status::"In process";
-                    SelectedRec.MODIFY;
+                    ChangeStatus.SetToInProcess(SelectedRec);
                 end;
             }
 
@@ -103,10 +103,10 @@ page 50141 OutOfOfficeRequests
                 trigger OnAction()
                 var
                     SelectedRec: Record OutOfOfficeRequest;
+                    ChangeStatus: Codeunit ChangeStatus;
                 begin
                     CurrPage.GetRecord(SelectedRec);
-                    SelectedRec.Status := SelectedRec.Status::Approved;
-                    SelectedRec.MODIFY;
+                    ChangeStatus.SetToApproved(SelectedRec);
                 end;
             }
 
@@ -118,10 +118,10 @@ page 50141 OutOfOfficeRequests
                 trigger OnAction()
                 var
                     SelectedRec: Record OutOfOfficeRequest;
+                    ChangeStatus: Codeunit ChangeStatus;
                 begin
                     CurrPage.GetRecord(SelectedRec);
-                    SelectedRec.Status := SelectedRec.Status::Declined;
-                    SelectedRec.MODIFY;
+                    ChangeStatus.SetToDeclined(SelectedRec);
                 end;
             }
         }

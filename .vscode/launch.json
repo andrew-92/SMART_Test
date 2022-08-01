@@ -9,7 +9,7 @@
             "server": "https://vmbc.eastus.cloudapp.azure.com",
             "serverInstance": "BC",
             "authentication": "UserPassword",
-            "startupObjectId": 50140,
+            "startupObjectId": 50141,
             "startupObjectType": "Page",
             "breakOnError": true,
             "launchBrowser": true,

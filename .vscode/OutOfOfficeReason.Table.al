@@ -7,13 +7,13 @@ table 50140 OutOfOfficeReasons
         field(1; Code; Code[20])
         {
             DataClassification = ToBeClassified;
-            Caption = 'Код';
+            Caption = 'Code';
         }
 
         field(2; Description; Text[100])
         {
             DataClassification = ToBeClassified;
-            Caption = 'Описание';
+            Caption = 'Description';
         }
     }
 
